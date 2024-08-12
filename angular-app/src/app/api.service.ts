@@ -25,27 +25,12 @@ export class ApiService {
     return this.http.get<Vehicle>(`${this.apiUrl}${id}/`, { headers });
   }
 
-updateVehicle(vehicle: Vehicle): Observable<Vehicle> {
-  // Przygotowanie pełnego obiektu z wszystkimi wymaganymi polami
-  const body = {
-    brand: vehicle.brand,
-    model: vehicle.model
-  };
-
-  const headers = new HttpHeaders({
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  });
-
-  return this.http.patch<Vehicle>(`${this.apiUrl}${vehicle.id}/`, body, { headers });
-}
+updateVehicle(id: number, formData: FormData): Observable<Vehicle> {
+    return this.http.patch<Vehicle>(`${this.apiUrl}${id}/`, formData);
+  }
 createVehicle(vehicle: FormData): Observable<Vehicle> {
   return this.http.post<Vehicle>(this.apiUrl, vehicle);
 }
-
-
-
-
 }
 
 export interface Vehicle {
