@@ -12,14 +12,36 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getVehicles(): Observable<Vehicle[]> {
-    // Tworzymy instancję HttpHeaders
     const headers = new HttpHeaders({
-      'Accept': 'application/json' // Oczekujemy, że serwer zwróci dane w formacie JSON
+      'Accept': 'application/json'
     });
-
-    // Przekazujemy nagłówki w opcjach żądania
     return this.http.get<Vehicle[]>(this.apiUrl, { headers });
   }
+
+  getOneVehicle(id: number): Observable<Vehicle> {
+    const headers = new HttpHeaders({
+      'Accept': 'application/json'
+    });
+    return this.http.get<Vehicle>(`${this.apiUrl}${id}/`, { headers });
+  }
+
+updateVehicle(vehicle: Vehicle): Observable<Vehicle> {
+  // Przygotowanie pełnego obiektu z wszystkimi wymaganymi polami
+  const body = {
+    brand: vehicle.brand,
+    model: vehicle.model
+  };
+
+  const headers = new HttpHeaders({
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.patch<Vehicle>(`${this.apiUrl}${vehicle.id}/`, body, { headers });
+}
+
+
+
 }
 
 export interface Vehicle {
@@ -39,5 +61,7 @@ export interface Vehicle {
   date_published: string;
   user: number;
 }
+
+
 
 

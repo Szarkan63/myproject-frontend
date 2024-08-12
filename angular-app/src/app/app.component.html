@@ -1,6 +1,6 @@
 <div *ngIf="vehicles.length > 0; else noVehicles">
   <div *ngFor="let vehicle of vehicles" class="vehicle-card">
-    <h2>{{ vehicle.title }}</h2>
+    <h2 (click)="vehicleClicked(vehicle)"> {{ vehicle.title }}</h2>
     <img [src]="vehicle.photo" alt="{{ vehicle.title }}" width="400" height="300">
     <p>{{ vehicle.description }}</p>
     <ul>
@@ -13,9 +13,18 @@
       <li>Moc: {{ vehicle.power }} KM</li>
       <li>Typ paliwa: {{ vehicle.fuel_type }}</li>
     </ul>
+    <hr>
+    <div *ngIf="selectedVehicle">
+      Marka <input type="text" [(ngModel)]="selectedVehicle.brand"/><br>
+      Model <input type="text" [(ngModel)]="selectedVehicle.model"/><br>
+      <button (click)="updateVehicle()">PUT</button>
+    </div>
   </div>
 </div>
 
 <ng-template #noVehicles>
   <p>Brak pojazdów do wyświetlenia.</p>
 </ng-template>
+
+
+
