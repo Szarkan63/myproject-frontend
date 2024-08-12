@@ -33,28 +33,41 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // updateVehicle = () => {
-  //   if (this.selectedVehicle) {
-  //     this.apiService.updateVehicle(this.selectedVehicle).subscribe(
-  //         (updatedVehicle: Vehicle) => {
-  //           console.log('Vehicle updated:', updatedVehicle);
-  //         },
-  //         (error) => {
-  //           console.error('Update failed:', error);
-  //         }
-  //     );
-  //   }
-  // }
+  deleteVehicle() {
+  if (!this.selectedVehicle) {
+    console.error('No vehicle selected for delete.');
+    return;
+  }
+
+  // Confirm deletion
+  if (!confirm('Are you sure you want to delete this vehicle?')) {
+    return;
+  }
+
+  const selectedVehicle = this.selectedVehicle; // Local variable
+
+  // Call API service to delete the vehicle
+  this.apiService.deleteVehicle(selectedVehicle.id).subscribe(
+    () => {
+      console.log('Vehicle deleted:', selectedVehicle.id);
+      // Remove vehicle from the local list
+      this.vehicles = this.vehicles.filter(v => v.id !== selectedVehicle.id);
+      // Optionally clear the selected vehicle
+      this.selectedVehicle = null;
+    },
+    (error) => {
+      console.error('Delete failed:', error);
+    }
+  );
+}
 
   updateVehicle() {
-  // Check if a vehicle is selected
   if (!this.selectedVehicle) {
     console.error('No vehicle selected for update.');
     return;
   }
 
   const formData: FormData = new FormData();
-  // Convert numeric values to strings before appending
   formData.append('id', this.selectedVehicle.id.toString());
   formData.append('title', this.selectedVehicle.title);
   formData.append('description', this.selectedVehicle.description);
@@ -67,22 +80,18 @@ export class AppComponent implements OnInit {
   formData.append('power', this.selectedVehicle.power.toString());
   formData.append('fuel_type', this.selectedVehicle.fuel_type);
 
-  // Handle the possibility of a new file upload
   const fileInput = document.querySelector('#photo2') as HTMLInputElement | null;
   if (fileInput && fileInput.files && fileInput.files[0]) {
     formData.append('photo', fileInput.files[0]);
   }
-
-  // Append other vehicle attributes if needed
   formData.append('date_added', this.selectedVehicle.date_added);
   formData.append('date_published', this.selectedVehicle.date_published);
   formData.append('user', this.selectedVehicle.user.toString());
 
-  // Call the API service to update the vehicle
+
   this.apiService.updateVehicle(this.selectedVehicle.id, formData).subscribe(
     (updatedVehicle: Vehicle) => {
       console.log('Vehicle updated:', updatedVehicle);
-      // Optionally, update the local vehicle list with the updated vehicle
       const index = this.vehicles.findIndex(v => v.id === updatedVehicle.id);
       if (index !== -1) {
         this.vehicles[index] = updatedVehicle;
@@ -107,7 +116,6 @@ createVehicle() {
   formData.append('power', '450');
   formData.append('fuel_type', 'benzyna');
 
-  // Handle the possibility of null
   const fileInput = document.querySelector('#photo') as HTMLInputElement | null;
   if (fileInput && fileInput.files && fileInput.files[0]) {
     formData.append('photo', fileInput.files[0]);

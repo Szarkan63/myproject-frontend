@@ -15,17 +15,17 @@
     </ul>
     <hr>
     <div *ngIf="selectedVehicle">
-      id ogloszenia <input type="number" [(ngModel)]="selectedVehicle.id"/><br>
+      id ogłoszenia <input type="number" [(ngModel)]="selectedVehicle.id"/><br>
       title <input type="text" [(ngModel)]="selectedVehicle.title"/><br>
       description <input type="text" [(ngModel)]="selectedVehicle.description"/><br>
       category <input type="text" [(ngModel)]="selectedVehicle.category"/><br>
       brand <input type="text" [(ngModel)]="selectedVehicle.brand"/><br>
-      Model <input type="text" [(ngModel)]="selectedVehicle.model"/><br>
-      Year <input type="text" [(ngModel)]="selectedVehicle.year"/><br>
-      Mileage <input type="text" [(ngModel)]="selectedVehicle.mileage"/><br>
+      model <input type="text" [(ngModel)]="selectedVehicle.model"/><br>
+      year <input type="text" [(ngModel)]="selectedVehicle.year"/><br>
+      mileage <input type="text" [(ngModel)]="selectedVehicle.mileage"/><br>
       engine_capacity <input type="text" [(ngModel)]="selectedVehicle.engine_capacity"/><br>
       power <input type="text" [(ngModel)]="selectedVehicle.power"/><br>
-      fueltype <input type="text" [(ngModel)]="selectedVehicle.fuel_type"/><br>
+      fuel_type <input type="text" [(ngModel)]="selectedVehicle.fuel_type"/><br>
       <input type="file" id="photo2">
       date added <input type="text" [(ngModel)]="selectedVehicle.date_added"/><br>
       date published <input type="text" [(ngModel)]="selectedVehicle.date_published"/><br>
@@ -33,6 +33,7 @@
       <button (click)="updateVehicle()">PUT</button>
       <input type="file" id="photo">
       <button (click)="createVehicle()">Dodaj pojazd</button>
+      <button (click)="deleteVehicle()">Usuń pojazd</button>
     </div>
   </div>
 </div>
@@ -40,6 +41,7 @@
 <ng-template #noVehicles>
   <p>Brak pojazdów do wyświetlenia.</p>
 </ng-template>
+
 
 
 

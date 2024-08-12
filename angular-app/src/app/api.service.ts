@@ -31,6 +31,9 @@ updateVehicle(id: number, formData: FormData): Observable<Vehicle> {
 createVehicle(vehicle: FormData): Observable<Vehicle> {
   return this.http.post<Vehicle>(this.apiUrl, vehicle);
 }
+deleteVehicle(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}${id}/`);
+  }
 }
 
 export interface Vehicle {

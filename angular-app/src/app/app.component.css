@@ -1,0 +1,22 @@
+.vehicle-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.vehicle-card h2 {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.vehicle-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+  margin-bottom: 10px;
+}
