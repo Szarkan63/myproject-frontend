@@ -45,6 +45,40 @@ export class AppComponent implements OnInit {
     );
   }
 }
+createVehicle() {
+  const formData: FormData = new FormData();
+
+  formData.append('title', 'Sprzedam Porsche 911');
+  formData.append('description', 'Sprzedam Porsche, stan idealny.');
+  formData.append('category', 'osobowy');
+  formData.append('brand', 'Porsche');
+  formData.append('model', '911');
+  formData.append('year', '2020');
+  formData.append('mileage', '10000');
+  formData.append('engine_capacity', '3000');
+  formData.append('power', '450');
+  formData.append('fuel_type', 'benzyna');
+
+  // Handle the possibility of null
+  const fileInput = document.querySelector('#photo') as HTMLInputElement | null;
+  if (fileInput && fileInput.files && fileInput.files[0]) {
+    formData.append('photo', fileInput.files[0]);
+  }
+
+  formData.append('user', '1');
+
+  this.apiService.createVehicle(formData).subscribe(
+    (createdVehicle: Vehicle) => {
+      console.log('Vehicle created:', createdVehicle);
+      this.vehicles.push(createdVehicle);
+    },
+    (error) => {
+      console.error('Creation failed:', error);
+    }
+  );
+}
+
+
 
 }
 

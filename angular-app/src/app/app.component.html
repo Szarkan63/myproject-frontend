@@ -15,9 +15,15 @@
     </ul>
     <hr>
     <div *ngIf="selectedVehicle">
-      Marka <input type="text" [(ngModel)]="selectedVehicle.brand"/><br>
+      id ogloszenia <input type="text" [(ngModel)]="selectedVehicle.id"/><br>
+      title <input type="text" [(ngModel)]="selectedVehicle.title"/><br>
+      description <input type="text" [(ngModel)]="selectedVehicle.model"/><br>
+      category <input type="text" [(ngModel)]="selectedVehicle.model"/><br>
+      brand <input type="text" [(ngModel)]="selectedVehicle.model"/><br>
       Model <input type="text" [(ngModel)]="selectedVehicle.model"/><br>
       <button (click)="updateVehicle()">PUT</button>
+      <input type="file" id="photo">
+      <button (click)="createVehicle()">Dodaj pojazd</button>
     </div>
   </div>
 </div>
@@ -25,6 +31,13 @@
 <ng-template #noVehicles>
   <p>Brak pojazdów do wyświetlenia.</p>
 </ng-template>
+
+
+
+
+
+
+
 
 
 

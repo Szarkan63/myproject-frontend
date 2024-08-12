@@ -39,6 +39,10 @@ updateVehicle(vehicle: Vehicle): Observable<Vehicle> {
 
   return this.http.patch<Vehicle>(`${this.apiUrl}${vehicle.id}/`, body, { headers });
 }
+createVehicle(vehicle: FormData): Observable<Vehicle> {
+  return this.http.post<Vehicle>(this.apiUrl, vehicle);
+}
+
 
 
 
