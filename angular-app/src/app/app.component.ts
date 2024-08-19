@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService, Vehicle } from './api.service';
 import { HttpClient } from "@angular/common/http";
-
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes'; // Import your routes here
 @Component({
   selector: 'app-root',
   standalone: true,

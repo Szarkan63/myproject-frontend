@@ -1,15 +1,17 @@
+
+
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; // Import FormsModule here
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  standalone: true, // Specify this is a standalone component
-  imports: [FormsModule] // Import FormsModule in standalone component
+  standalone: true,
+  imports: [FormsModule]
 })
 export class LoginComponent {
   username: string = '';
@@ -20,11 +22,11 @@ export class LoginComponent {
   login() {
     this.authService.login(this.username, this.password).subscribe(
       (response: any) => {
-        const token = response.token; // Adjust based on your backend response
+        const token = response.token;
         if (token) {
           localStorage.setItem('token', token);
-          this.authService.setLoggedIn(true);
-          this.router.navigate(['/dashboard']); // Redirect to a protected route
+          this.authService.setLoggedIn(true); // Ensure this is called
+          this.router.navigate(['/home']);
         }
       },
       (error: HttpErrorResponse) => {
@@ -33,6 +35,9 @@ export class LoginComponent {
     );
   }
 }
+
+
+
 
 
 
