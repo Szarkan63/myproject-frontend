@@ -39,20 +39,18 @@ export class AppComponent implements OnInit {
     return;
   }
 
-  // Confirm deletion
+
   if (!confirm('Are you sure you want to delete this vehicle?')) {
     return;
   }
 
-  const selectedVehicle = this.selectedVehicle; // Local variable
+  const selectedVehicle = this.selectedVehicle;
 
-  // Call API service to delete the vehicle
+
   this.apiService.deleteVehicle(selectedVehicle.id).subscribe(
     () => {
       console.log('Vehicle deleted:', selectedVehicle.id);
-      // Remove vehicle from the local list
       this.vehicles = this.vehicles.filter(v => v.id !== selectedVehicle.id);
-      // Optionally clear the selected vehicle
       this.selectedVehicle = null;
     },
     (error) => {

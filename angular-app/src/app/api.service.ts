@@ -26,7 +26,7 @@ export class ApiService {
   }
 
 updateVehicle(id: number, formData: FormData): Observable<Vehicle> {
-    return this.http.patch<Vehicle>(`${this.apiUrl}${id}/`, formData);
+    return this.http.put<Vehicle>(`${this.apiUrl}${id}/`, formData);
   }
 createVehicle(vehicle: FormData): Observable<Vehicle> {
   return this.http.post<Vehicle>(this.apiUrl, vehicle);

@@ -1,0 +1,44 @@
+<div *ngIf="vehicles.length > 0; else noVehicles">
+  <div *ngFor="let vehicle of vehicles" class="vehicle-card">
+    <h2 (click)="vehicleClicked(vehicle)"> {{ vehicle.title }}</h2>
+    <img [src]="vehicle.photo" alt="{{ vehicle.title }}" width="400" height="300">
+    <p>{{ vehicle.description }}</p>
+    <ul>
+      <li>Kategoria: {{ vehicle.category }}</li>
+      <li>Marka: {{ vehicle.brand }}</li>
+      <li>Model: {{ vehicle.model }}</li>
+      <li>Rok: {{ vehicle.year }}</li>
+      <li>Przebieg: {{ vehicle.mileage }} km</li>
+      <li>Pojemność silnika: {{ vehicle.engine_capacity }} cm³</li>
+      <li>Moc: {{ vehicle.power }} KM</li>
+      <li>Typ paliwa: {{ vehicle.fuel_type }}</li>
+    </ul>
+    <hr>
+    <div *ngIf="selectedVehicle">
+      id ogłoszenia <input type="number" [(ngModel)]="selectedVehicle.id"/><br>
+      title <input type="text" [(ngModel)]="selectedVehicle.title"/><br>
+      description <input type="text" [(ngModel)]="selectedVehicle.description"/><br>
+      category <input type="text" [(ngModel)]="selectedVehicle.category"/><br>
+      brand <input type="text" [(ngModel)]="selectedVehicle.brand"/><br>
+      model <input type="text" [(ngModel)]="selectedVehicle.model"/><br>
+      year <input type="text" [(ngModel)]="selectedVehicle.year"/><br>
+      mileage <input type="text" [(ngModel)]="selectedVehicle.mileage"/><br>
+      engine_capacity <input type="text" [(ngModel)]="selectedVehicle.engine_capacity"/><br>
+      power <input type="text" [(ngModel)]="selectedVehicle.power"/><br>
+      fuel_type <input type="text" [(ngModel)]="selectedVehicle.fuel_type"/><br>
+      <input type="file" id="photo2">
+      date added <input type="text" [(ngModel)]="selectedVehicle.date_added"/><br>
+      date published <input type="text" [(ngModel)]="selectedVehicle.date_published"/><br>
+      user id <input type="text" [(ngModel)]="selectedVehicle.user"/><br>
+      <button (click)="updateVehicle()">PUT</button>
+      <input type="file" id="photo">
+      <button (click)="createVehicle()">Dodaj pojazd</button>
+      <button (click)="deleteVehicle()">Usuń pojazd</button>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<ng-template #noVehicles>
+  <p>Brak pojazdów do wyświetlenia.</p>
+</ng-template>
+
