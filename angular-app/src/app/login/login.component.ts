@@ -20,20 +20,24 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    this.authService.login(this.username, this.password).subscribe(
-      (response: any) => {
-        const token = response.token;
-        if (token) {
-          localStorage.setItem('token', token);
-          this.authService.setLoggedIn(true); // Ensure this is called
-          this.router.navigate(['/home']);
-        }
-      },
-      (error: HttpErrorResponse) => {
-        console.error('Login error', error);
+  this.authService.login(this.username, this.password).subscribe(
+    (response: any) => {
+      const token = response.token;
+      if (token) {
+        localStorage.setItem('token', token);
+        this.authService.setLoggedIn(true);
+        this.router.navigate(['/home']);
+      } else {
+        console.error('Token not found in response:', response);
       }
-    );
-  }
+    },
+    (error: HttpErrorResponse) => {
+      console.error('Login error', error);
+    }
+  );
+}
+
+
 }
 
 
