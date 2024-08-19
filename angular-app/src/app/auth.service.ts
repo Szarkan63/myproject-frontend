@@ -39,6 +39,10 @@ export class AuthService {
     }
     this.setLoggedIn(false);
   }
+  getUserName(): string | null {
+  return localStorage.getItem('userName');
+}
+
 }
 
 

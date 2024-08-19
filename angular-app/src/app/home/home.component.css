@@ -1,0 +1,11 @@
+/* home.component.css */
+:host {
+  display: block; /* Upewnij się, że host jest blokowym elementem */
+  background-color: white; /* Ustaw tło na białe */
+  min-height: 100vh; /* Ustaw minimalną wysokość, aby pokryć całą stronę */
+}
+
+/* Opcjonalne: Stylizacja wewnętrznych elementów */
+.home-content {
+  padding: 20px; /* Dodaj trochę paddingu */
+}
