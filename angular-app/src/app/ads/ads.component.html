@@ -6,18 +6,47 @@
   <button class="btn btn-info mb-3" (click)="showUserInfo()">Pokaż Informacje o Użytkowniku</button>
 
   <!-- Display user information -->
-  <div *ngIf="userInfo">
+  <div *ngIf="userInfo" class="user-info mb-4">
     <p><strong>ID:</strong> {{ userInfo.id }}</p>
     <p><strong>Username:</strong> {{ userInfo.userName }}</p>
   </div>
 
   <!-- Formularz dodawania ogłoszenia -->
-  <div *ngIf="isFormVisible">
+  <div *ngIf="isFormVisible" class="mb-4">
     <app-add-ad></app-add-ad> <!-- Komponent formularza dodawania ogłoszenia -->
   </div>
 
-  <!-- Tutaj umieść kod do wyświetlania listy ogłoszeń -->
+  <!-- Wyświetlanie ogłoszeń użytkownika -->
+  <div *ngIf="userVehicles && userVehicles.length > 0">
+    <h3>Twoje Ogłoszenia</h3>
+    <div class="vehicle-list">
+      <div *ngFor="let vehicle of userVehicles" class="vehicle-card">
+        <div class="vehicle-photo">
+          <img *ngIf="vehicle.photo" [src]="vehicle.photo" alt="{{ vehicle.title }}">
+        </div>
+        <div class="vehicle-info">
+          <h5>{{ vehicle.title }}</h5>
+          <p><strong>Opis:</strong> {{ vehicle.description }}</p>
+          <p><strong>Kategoria:</strong> {{ vehicle.category }}</p>
+          <p><strong>Marka:</strong> {{ vehicle.brand }}</p>
+          <p><strong>Model:</strong> {{ vehicle.model }}</p>
+          <p><strong>Rok:</strong> {{ vehicle.year }}</p>
+          <p><strong>Przebieg:</strong> {{ vehicle.mileage }} km</p>
+          <p><strong>Pojemność silnika:</strong> {{ vehicle.engine_capacity }} L</p>
+          <p><strong>Moc:</strong> {{ vehicle.power }} KM</p>
+          <p><strong>Typ paliwa:</strong> {{ vehicle.fuel_type }}</p>
+          <p><strong>Data dodania:</strong> {{ vehicle.date_added }}</p>
+          <p><strong>Data publikacji:</strong> {{ vehicle.date_published }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="userVehicles && userVehicles.length === 0">
+    <p>Brak ogłoszeń do wyświetlenia.</p>
+  </div>
 </div>
+
+
 
 
 

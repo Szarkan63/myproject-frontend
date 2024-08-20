@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ApiService, Vehicle } from '../api.service';
 import { AuthService } from '../auth.service';
+import { CommonModule } from '@angular/common';
 import { AddAdComponent } from '../add-ad/add-ad.component';
 
 @Component({
@@ -10,26 +11,43 @@ import { AddAdComponent } from '../add-ad/add-ad.component';
   standalone: true,
   imports: [CommonModule, AddAdComponent]
 })
-export class AdsComponent {
-  isFormVisible = false; // Początkowo formularz jest niewidoczny
-  userInfo: { id: number | null, userName: string | null } | null = null; // User info to display
+export class AdsComponent implements OnInit {
+  isFormVisible = false;
+  userInfo: { id: number | null, userName: string | null } | null = null;
+  allVehicles: Vehicle[] = [];
+  userVehicles: Vehicle[] = [];
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private apiService: ApiService) {}
+
+  ngOnInit() {
+    this.showUserInfo();
+    if (this.userInfo?.id) { // Sprawdź, czy id jest dostępne
+      this.loadUserVehicles(this.userInfo.id);
+    }
+  }
 
   toggleForm() {
-    this.isFormVisible = !this.isFormVisible; // Przełącz widoczność formularza
+    this.isFormVisible = !this.isFormVisible;
   }
 
   showUserInfo() {
     const userId = this.authService.getUserId();
     const userName = this.authService.getUserName();
 
-    // Debugging
     console.log(`User ID: ${userId}`);
     console.log(`User Name: ${userName}`);
 
-    // Update userInfo property
     this.userInfo = { id: userId, userName };
   }
+
+
+  loadUserVehicles(userId: number) {
+    this.apiService.getUserVehicles(userId).subscribe((vehicles: Vehicle[]) => { // Określ typ dla vehicles
+      this.userVehicles = vehicles;
+      console.log('User vehicles:', vehicles);
+    });
+  }
 }
+
+
 

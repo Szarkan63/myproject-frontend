@@ -44,6 +44,11 @@ export class ApiService {
     const headers = this.getAuthHeaders();
     return this.http.delete<void>(`${this.apiUrl}${id}/`, { headers });
   }
+  getUserVehicles(userId: number): Observable<Vehicle[]> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<Vehicle[]>(`${this.apiUrl}?user=${userId}`, { headers });
+  }
+
 }
 
 export interface Vehicle {

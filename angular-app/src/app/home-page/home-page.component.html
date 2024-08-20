@@ -1,34 +1,42 @@
-<!-- src/app/home-page/home-page.component.html -->
-<div class="home-page">
-  <h2>Witaj na Stronie Głównej!</h2>
-  <p>To jest strona powitalna wyświetlana w miejscu router-outlet.</p>
+<div class="home-page container my-5">
+  <h2 class="text-center mb-4">Witaj na Stronie Głównej!</h2>
+  <p class="text-center">Przeglądaj tysiące ofert z całego świata.</p>
 
   <div *ngIf="vehicles.length > 0; else noVehicles">
-    <h3>Lista pojazdów:</h3>
-    <ul>
-      <li *ngFor="let vehicle of vehicles">
-        <strong>{{ vehicle.title }}</strong><br>
-        Opis: {{ vehicle.description }}<br>
-        Kategoria: {{ vehicle.category }}<br>
-        Marka: {{ vehicle.brand }}<br>
-        Model: {{ vehicle.model }}<br>
-        Rok: {{ vehicle.year }}<br>
-        Przebieg: {{ vehicle.mileage }} km<br>
-        Pojemność silnika: {{ vehicle.engine_capacity }} cm³<br>
-        Moc: {{ vehicle.power }} KM<br>
-        Typ paliwa: {{ vehicle.fuel_type }}<br>
-        <img *ngIf="vehicle.photo" [src]="vehicle.photo" alt="{{ vehicle.title }}" style="max-width: 300px; max-height: 200px;"><br>
-        <span>Dodano: {{ vehicle.date_added }}</span><br>
-        <span>Opublikowano: {{ vehicle.date_published }}</span><br>
-        <span>Użytkownik ID: {{ vehicle.user }}</span>
-      </li>
-    </ul>
+    <h3 class="mb-4">Aktywne ogłoszenia:</h3>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 mb-4" *ngFor="let vehicle of vehicles">
+        <div class="card h-100 shadow-sm">
+          <img *ngIf="vehicle.photo" [src]="vehicle.photo" class="card-img-top" alt="{{ vehicle.title }}" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">{{ vehicle.title }}</h5>
+            <p class="card-text">
+              <strong>Opis:</strong> {{ vehicle.description }}<br>
+              <strong>Kategoria:</strong> {{ vehicle.category }}<br>
+              <strong>Marka:</strong> {{ vehicle.brand }}<br>
+              <strong>Model:</strong> {{ vehicle.model }}<br>
+              <strong>Rok:</strong> {{ vehicle.year }}<br>
+              <strong>Przebieg:</strong> {{ vehicle.mileage }} km<br>
+              <strong>Pojemność silnika:</strong> {{ vehicle.engine_capacity }} cm³<br>
+              <strong>Moc:</strong> {{ vehicle.power }} KM<br>
+              <strong>Typ paliwa:</strong> {{ vehicle.fuel_type }}<br>
+            </p>
+          </div>
+          <div class="card-footer bg-dark text-white p-3 position-relative">
+  <span>Dodano: {{ vehicle.date_added }}</span><br>
+  <span>Opublikowano: {{ vehicle.date_published }}</span><br>
+  <span>Użytkownik ID: {{ vehicle.user }}</span>
+</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <ng-template #noVehicles>
-    <p>Brak dostępnych pojazdów.</p>
+    <p class="text-center">Brak dostępnych pojazdów.</p>
   </ng-template>
 </div>
+
 
 
 

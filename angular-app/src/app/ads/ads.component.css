@@ -1,21 +1,68 @@
-:host {
-  display: block;
-  background-color: white;
-  min-height: 100vh;
+/* General container styling */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
-/* Opcjonalne: Stylizacja wewnętrznych elementów */
-.ads-list {
-  padding: 20px;
-}
-
-.ad-item {
-  border: 1px solid #ddd;
+/* User info section */
+.user-info {
+  background-color: #f8f9fa;
   padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.ad-item h3 {
-  margin-top: 0;
+.user-info p {
+  margin: 0;
 }
+
+/* Vehicle list */
+.vehicle-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Vehicle card */
+.vehicle-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: calc(33.333% - 20px);
+  box-sizing: border-box;
+}
+
+.vehicle-photo {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.vehicle-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vehicle-info {
+  padding: 15px;
+}
+
+.vehicle-info h5 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.vehicle-info p {
+  margin: 5px 0;
+}
+
+/* No ads message */
+p {
+  font-style: italic;
+  color: #888;
+}
+
+
