@@ -2,5 +2,33 @@
 <div class="home-page">
   <h2>Witaj na Stronie Głównej!</h2>
   <p>To jest strona powitalna wyświetlana w miejscu router-outlet.</p>
+
+  <div *ngIf="vehicles.length > 0; else noVehicles">
+    <h3>Lista pojazdów:</h3>
+    <ul>
+      <li *ngFor="let vehicle of vehicles">
+        <strong>{{ vehicle.title }}</strong><br>
+        Opis: {{ vehicle.description }}<br>
+        Kategoria: {{ vehicle.category }}<br>
+        Marka: {{ vehicle.brand }}<br>
+        Model: {{ vehicle.model }}<br>
+        Rok: {{ vehicle.year }}<br>
+        Przebieg: {{ vehicle.mileage }} km<br>
+        Pojemność silnika: {{ vehicle.engine_capacity }} cm³<br>
+        Moc: {{ vehicle.power }} KM<br>
+        Typ paliwa: {{ vehicle.fuel_type }}<br>
+        <img *ngIf="vehicle.photo" [src]="vehicle.photo" alt="{{ vehicle.title }}" style="max-width: 300px; max-height: 200px;"><br>
+        <span>Dodano: {{ vehicle.date_added }}</span><br>
+        <span>Opublikowano: {{ vehicle.date_published }}</span><br>
+        <span>Użytkownik ID: {{ vehicle.user }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #noVehicles>
+    <p>Brak dostępnych pojazdów.</p>
+  </ng-template>
 </div>
+
+
 

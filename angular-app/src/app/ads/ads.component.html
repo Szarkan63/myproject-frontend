@@ -1,7 +1,15 @@
-<!-- src/app/ads/ads.component.html -->
 <div class="container mt-5">
   <h2>Moje Ogłoszenia</h2>
   <button class="btn btn-success mb-3" (click)="toggleForm()">Dodaj Ogłoszenie</button>
+
+  <!-- Button to show user information -->
+  <button class="btn btn-info mb-3" (click)="showUserInfo()">Pokaż Informacje o Użytkowniku</button>
+
+  <!-- Display user information -->
+  <div *ngIf="userInfo">
+    <p><strong>ID:</strong> {{ userInfo.id }}</p>
+    <p><strong>Username:</strong> {{ userInfo.userName }}</p>
+  </div>
 
   <!-- Formularz dodawania ogłoszenia -->
   <div *ngIf="isFormVisible">
@@ -10,6 +18,8 @@
 
   <!-- Tutaj umieść kod do wyświetlania listy ogłoszeń -->
 </div>
+
+
 
 
 
