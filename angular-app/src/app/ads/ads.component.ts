@@ -21,9 +21,6 @@ export class AdsComponent implements OnInit {
 
   ngOnInit() {
     this.showUserInfo();
-    if (this.userInfo?.id) { // Sprawdź, czy id jest dostępne
-      this.loadUserVehicles(this.userInfo.id);
-    }
   }
 
   toggleForm() {
@@ -38,16 +35,35 @@ export class AdsComponent implements OnInit {
     console.log(`User Name: ${userName}`);
 
     this.userInfo = { id: userId, userName };
+    if (userId) {
+      this.loadUserVehicles(userId);
+    }
   }
 
+  deleteVehicle(vehicleId: number): void {
+    if (confirm('Are you sure you want to delete this vehicle?')) {
+      console.log('Attempting to delete vehicle with ID:', vehicleId); // Debug log
+
+      this.apiService.deleteVehicle(vehicleId).subscribe(() => {
+        const userId = this.userInfo?.id;
+        if (userId) {
+          this.loadUserVehicles(userId); // Reload the list after deletion
+        }
+      }, error => {
+        console.error('Error deleting vehicle:', error);
+      });
+    }
+  }
 
   loadUserVehicles(userId: number) {
-    this.apiService.getUserVehicles(userId).subscribe((vehicles: Vehicle[]) => { // Określ typ dla vehicles
+    this.apiService.getUserVehicles(userId).subscribe((vehicles: Vehicle[]) => {
       this.userVehicles = vehicles;
       console.log('User vehicles:', vehicles);
     });
   }
 }
+
+
 
 
 

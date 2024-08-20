@@ -1,9 +1,9 @@
 <div class="container mt-5">
-  <h2>Moje Ogłoszenia</h2>
-  <button class="btn btn-success mb-3" (click)="toggleForm()">Dodaj Ogłoszenie</button>
-
-  <!-- Button to show user information -->
-  <button class="btn btn-info mb-3" (click)="showUserInfo()">Pokaż Informacje o Użytkowniku</button>
+  <h2 class="text-center mb-4">Moje Ogłoszenia</h2>
+  <div class="text-center mb-4">
+    <button class="btn btn-success mb-3" (click)="toggleForm()">Dodaj Ogłoszenie</button>
+    <button class="btn btn-info mb-3" (click)="showUserInfo()">Pokaż Informacje o Użytkowniku</button>
+  </div>
 
   <!-- Display user information -->
   <div *ngIf="userInfo" class="user-info mb-4">
@@ -18,7 +18,7 @@
 
   <!-- Wyświetlanie ogłoszeń użytkownika -->
   <div *ngIf="userVehicles && userVehicles.length > 0">
-    <h3>Twoje Ogłoszenia</h3>
+    <h3 class="text-center mb-4">Twoje Ogłoszenia</h3>
     <div class="vehicle-list">
       <div *ngFor="let vehicle of userVehicles" class="vehicle-card">
         <div class="vehicle-photo">
@@ -36,15 +36,22 @@
           <p><strong>Moc:</strong> {{ vehicle.power }} KM</p>
           <p><strong>Typ paliwa:</strong> {{ vehicle.fuel_type }}</p>
           <p><strong>Data dodania:</strong> {{ vehicle.date_added }}</p>
-          <p><strong>Data publikacji:</strong> {{ vehicle.date_published }}</p>
+          <p><strong>ID pojazdu:</strong> {{ vehicle.id }}</p>
+        </div>
+        <div class="vehicle-actions">
+          <button class="btn btn-primary" >Modyfikuj</button>
+          <button class="btn btn-danger" (click)="deleteVehicle(vehicle.id)">Usuń</button>
         </div>
       </div>
     </div>
   </div>
   <div *ngIf="userVehicles && userVehicles.length === 0">
-    <p>Brak ogłoszeń do wyświetlenia.</p>
+    <p class="text-center">Brak ogłoszeń do wyświetlenia.</p>
   </div>
 </div>
+
+
+
 
 
 

@@ -40,15 +40,16 @@ export class ApiService {
     return this.http.post<Vehicle>(this.apiUrl, vehicle, { headers });
   }
 
-  deleteVehicle(id: number): Observable<void> {
+  // Adjusted deleteVehicle method to accept vehicleId
+  deleteVehicle(vehicleId: number): Observable<void> {
     const headers = this.getAuthHeaders();
-    return this.http.delete<void>(`${this.apiUrl}${id}/`, { headers });
+    return this.http.delete<void>(`${this.apiUrl}${vehicleId}/`, { headers });
   }
+
   getUserVehicles(userId: number): Observable<Vehicle[]> {
     const headers = this.getAuthHeaders();
     return this.http.get<Vehicle[]>(`${this.apiUrl}?user=${userId}`, { headers });
   }
-
 }
 
 export interface Vehicle {
@@ -68,6 +69,7 @@ export interface Vehicle {
   date_published: string;
   user: number;
 }
+
 
 
 

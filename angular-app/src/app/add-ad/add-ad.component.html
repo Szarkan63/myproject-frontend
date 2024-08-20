@@ -1,64 +1,183 @@
 <p>Formularz Dodawania Ogłoszenia</p>
 <div class="container mt-5">
   <h2>Dodaj Ogłoszenie</h2>
-  <form (ngSubmit)="onSubmit()" #adForm="ngForm">
 
+  <!-- Formularz wyświetlany tylko wtedy, gdy showMessage jest false -->
+  <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()" #adForm="ngForm">
     <div class="mb-3">
       <label for="title" class="form-label">Tytuł</label>
-      <input type="text" id="title" name="title" class="form-control" [(ngModel)]="vehicle.title" required>
+      <input
+        type="text"
+        id="title"
+        formControlName="title"
+        class="form-control"
+      />
+      <div *ngIf="formControls['title'].invalid && (formControls['title'].dirty || formControls['title'].touched)" class="text-danger">
+        <div *ngIf="formControls['title'].errors?.['required']">Tytuł jest wymagany.</div>
+        <div *ngIf="formControls['title'].errors?.['minlength']">Tytuł jest za krótki.</div>
+        <div *ngIf="formControls['title'].errors?.['maxlength']">Tytuł jest za długi.</div>
+      </div>
     </div>
 
     <div class="mb-3">
       <label for="description" class="form-label">Opis</label>
-      <textarea id="description" name="description" class="form-control" [(ngModel)]="vehicle.description" required></textarea>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="form-control"
+      ></textarea>
+      <div *ngIf="formControls['description'].invalid && (formControls['description'].dirty || formControls['description'].touched)" class="text-danger">
+        <div *ngIf="formControls['description'].errors?.['required']">Opis jest wymagany.</div>
+      </div>
     </div>
 
     <div class="mb-3">
       <label for="category" class="form-label">Kategoria</label>
-      <input type="text" id="category" name="category" class="form-control" [(ngModel)]="vehicle.category" required>
+      <select
+        id="category"
+        formControlName="category"
+        class="form-control"
+      >
+        <option value="" disabled>Wybierz kategorię</option>
+        <option value="motocykl">Motocykl</option>
+        <option value="osobowy">Osobowy</option>
+        <option value="ciężarowy">Ciężarowy</option>
+      </select>
+      <div *ngIf="formControls['category'].invalid && (formControls['category'].dirty || formControls['category'].touched)" class="text-danger">
+        <div *ngIf="formControls['category'].errors?.['required']">Kategoria jest wymagana.</div>
+      </div>
     </div>
 
     <div class="mb-3">
       <label for="brand" class="form-label">Marka</label>
-      <input type="text" id="brand" name="brand" class="form-control" [(ngModel)]="vehicle.brand" required>
+      <input
+        type="text"
+        id="brand"
+        formControlName="brand"
+        class="form-control"
+      />
+      <div *ngIf="formControls['brand'].invalid && (formControls['brand'].dirty || formControls['brand'].touched)" class="text-danger">
+        <div *ngIf="formControls['brand'].errors?.['required']">Marka jest wymagana.</div>
+        <div *ngIf="formControls['brand'].errors?.['maxlength']">Nazwa marki jest za długa.</div>
+      </div>
     </div>
 
     <div class="mb-3">
       <label for="model" class="form-label">Model</label>
-      <input type="text" id="model" name="model" class="form-control" [(ngModel)]="vehicle.model" required>
+      <input
+        type="text"
+        id="model"
+        formControlName="model"
+        class="form-control"
+      />
+      <div *ngIf="formControls['model'].invalid && (formControls['model'].dirty || formControls['model'].touched)" class="text-danger">
+        <div *ngIf="formControls['model'].errors?.['required']">Model jest wymagany.</div>
+        <div *ngIf="formControls['model'].errors?.['maxlength']">Nazwa modelu jest za długa.</div>
+      </div>
     </div>
 
     <div class="mb-3">
       <label for="year" class="form-label">Rok</label>
-      <input type="number" id="year" name="year" class="form-control" [(ngModel)]="vehicle.year" required>
+      <input
+        type="number"
+        id="year"
+        formControlName="year"
+        class="form-control"
+      />
+      <div *ngIf="formControls['year'].invalid && (formControls['year'].dirty || formControls['year'].touched)" class="text-danger">
+        <div *ngIf="formControls['year'].errors?.['required']">Rok jest wymagany.</div>
+        <div *ngIf="formControls['year'].errors?.['min']">Niepoprawna data.</div>
+        <div *ngIf="formControls['year'].errors?.['max']">Nie mamy jeszcze takiego roku.</div>
+      </div>
     </div>
 
     <div class="mb-3">
       <label for="mileage" class="form-label">Przebieg</label>
-      <input type="number" id="mileage" name="mileage" class="form-control" [(ngModel)]="vehicle.mileage" required>
+      <input
+        type="number"
+        id="mileage"
+        formControlName="mileage"
+        class="form-control"
+      />
+      <div *ngIf="formControls['mileage'].invalid && (formControls['mileage'].dirty || formControls['mileage'].touched)" class="text-danger">
+        <div *ngIf="formControls['mileage'].errors?.['required']">Przebieg jest wymagany.</div>
+        <div *ngIf="formControls['mileage'].errors?.['min']">Przebieg nie może być mniejszy niż 0.</div>
+        <div *ngIf="formControls['mileage'].errors?.['max']">Przebieg nie może przekraczać 1 500 000.</div>
+      </div>
     </div>
 
     <div class="mb-3">
       <label for="engine_capacity" class="form-label">Pojemność Silnika</label>
-      <input type="number" id="engine_capacity" name="engine_capacity" class="form-control" [(ngModel)]="vehicle.engine_capacity" required>
+      <input
+        type="number"
+        id="engine_capacity"
+        formControlName="engine_capacity"
+        class="form-control"
+      />
+      <div *ngIf="formControls['engine_capacity'].invalid && (formControls['engine_capacity'].dirty || formControls['engine_capacity'].touched)" class="text-danger">
+        <div *ngIf="formControls['engine_capacity'].errors?.['required']">Pojemność silnika jest wymagana.</div>
+        <div *ngIf="formControls['engine_capacity'].errors?.['min']">Pojemność silnika nie może być mniejsza niż 0.</div>
+        <div *ngIf="formControls['engine_capacity'].errors?.['max']">Pojemność silnika nie może przekraczać 10 000.</div>
+      </div>
     </div>
 
     <div class="mb-3">
       <label for="power" class="form-label">Moc</label>
-      <input type="number" id="power" name="power" class="form-control" [(ngModel)]="vehicle.power" required>
+      <input
+        type="number"
+        id="power"
+        formControlName="power"
+        class="form-control"
+      />
+      <div *ngIf="formControls['power'].invalid && (formControls['power'].dirty || formControls['power'].touched)" class="text-danger">
+        <div *ngIf="formControls['power'].errors?.['required']">Moc jest wymagana.</div>
+        <div *ngIf="formControls['power'].errors?.['min']">Moc nie może być mniejsza niż 0.</div>
+        <div *ngIf="formControls['power'].errors?.['max']">Moc nie może przekraczać 2000.</div>
+      </div>
     </div>
 
     <div class="mb-3">
       <label for="fuel_type" class="form-label">Rodzaj Paliwa</label>
-      <input type="text" id="fuel_type" name="fuel_type" class="form-control" [(ngModel)]="vehicle.fuel_type" required>
+      <select
+        id="fuel_type"
+        formControlName="fuel_type"
+        class="form-control"
+      >
+        <option value="" disabled>Wybierz rodzaj paliwa</option>
+        <option value="benzyna">Benzyna</option>
+        <option value="diesel">Diesel</option>
+        <option value="LPG">LPG</option>
+      </select>
+      <div *ngIf="formControls['fuel_type'].invalid && (formControls['fuel_type'].dirty || formControls['fuel_type'].touched)" class="text-danger">
+        <div *ngIf="formControls['fuel_type'].errors?.['required']">Rodzaj paliwa jest wymagany.</div>
+      </div>
     </div>
 
     <div class="mb-3">
       <label for="photo" class="form-label">Zdjęcie</label>
-      <input type="file" id="photo" name="photo" class="form-control" (change)="onFileChange($event)" required>
+      <input
+        type="file"
+        id="photo"
+        (change)="onFileChange($event)"
+        class="form-control"
+        formControlName="photo"
+      />
+      <div *ngIf="formControls['photo'].invalid && (formControls['photo'].dirty || formControls['photo'].touched)" class="text-danger">
+        <div *ngIf="formControls['photo'].errors?.['required']">Zdjęcie jest wymagane.</div>
+      </div>
     </div>
 
     <button type="submit" class="btn btn-primary">Dodaj Ogłoszenie</button>
   </form>
+
+  <!-- Komunikat wyświetlany tylko wtedy, gdy showMessage jest true -->
+  <div *ngIf="showMessage" class="alert alert-success">
+    Pomyslnie dodano ogłoszenie!
+  </div>
 </div>
+
+
+
+
+
 
