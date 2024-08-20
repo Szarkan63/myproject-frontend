@@ -1,0 +1,16 @@
+<!-- src/app/ads/ads.component.html -->
+<div class="container mt-5">
+  <h2>Moje Ogłoszenia</h2>
+  <button class="btn btn-success mb-3" (click)="toggleForm()">Dodaj Ogłoszenie</button>
+
+  <!-- Formularz dodawania ogłoszenia -->
+  <div *ngIf="isFormVisible">
+    <app-add-ad></app-add-ad> <!-- Komponent formularza dodawania ogłoszenia -->
+  </div>
+
+  <!-- Tutaj umieść kod do wyświetlania listy ogłoszeń -->
+</div>
+
+
+
+

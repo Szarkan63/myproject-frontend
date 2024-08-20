@@ -1,0 +1,64 @@
+<p>Formularz Dodawania Ogłoszenia</p>
+<div class="container mt-5">
+  <h2>Dodaj Ogłoszenie</h2>
+  <form (ngSubmit)="onSubmit()" #adForm="ngForm">
+
+    <div class="mb-3">
+      <label for="title" class="form-label">Tytuł</label>
+      <input type="text" id="title" name="title" class="form-control" [(ngModel)]="vehicle.title" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Opis</label>
+      <textarea id="description" name="description" class="form-control" [(ngModel)]="vehicle.description" required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Kategoria</label>
+      <input type="text" id="category" name="category" class="form-control" [(ngModel)]="vehicle.category" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="brand" class="form-label">Marka</label>
+      <input type="text" id="brand" name="brand" class="form-control" [(ngModel)]="vehicle.brand" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="model" class="form-label">Model</label>
+      <input type="text" id="model" name="model" class="form-control" [(ngModel)]="vehicle.model" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="year" class="form-label">Rok</label>
+      <input type="number" id="year" name="year" class="form-control" [(ngModel)]="vehicle.year" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="mileage" class="form-label">Przebieg</label>
+      <input type="number" id="mileage" name="mileage" class="form-control" [(ngModel)]="vehicle.mileage" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="engine_capacity" class="form-label">Pojemność Silnika</label>
+      <input type="number" id="engine_capacity" name="engine_capacity" class="form-control" [(ngModel)]="vehicle.engine_capacity" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="power" class="form-label">Moc</label>
+      <input type="number" id="power" name="power" class="form-control" [(ngModel)]="vehicle.power" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="fuel_type" class="form-label">Rodzaj Paliwa</label>
+      <input type="text" id="fuel_type" name="fuel_type" class="form-control" [(ngModel)]="vehicle.fuel_type" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="photo" class="form-label">Zdjęcie</label>
+      <input type="file" id="photo" name="photo" class="form-control" (change)="onFileChange($event)" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Dodaj Ogłoszenie</button>
+  </form>
+</div>
+

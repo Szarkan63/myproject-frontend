@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  background-color: white;
+  min-height: 100vh;
+}
+
+/* Opcjonalne: Stylizacja wewnętrznych elementów */
+.ads-list {
+  padding: 20px;
+}
+
+.ad-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.ad-item h3 {
+  margin-top: 0;
+}
